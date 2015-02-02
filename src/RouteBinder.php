@@ -9,7 +9,7 @@ interface RouteBinder
      * You may also bind parameters, filters or anything you need to do
      * with the router here.
      *
-     * @param \Illuminate\Routing\Router $router
+     * @param  \Illuminate\Routing\Router $router
      * @return void
      */
     public function bind(Router $router);

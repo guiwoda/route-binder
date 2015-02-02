@@ -1,4 +1,4 @@
-<?php namespace Tests;
+<?php
 
 use GuiWoda\RouteBinder\RouteBinder;
 use GuiWoda\RouteBinder\RouteBinderServiceProvider;
@@ -9,7 +9,7 @@ use Illuminate\Routing\Router;
 class RouteBinderServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
     /** @test */
-    function it_should_make_all_routing_classes_and_call_bind_on_them()
+    public function it_should_make_all_routing_classes_and_call_bind_on_them()
     {
         $appMock         = \Mockery::mock(Container::class);
         $configMock      = \Mockery::mock(Repository::class);
@@ -17,7 +17,7 @@ class RouteBinderServiceProviderTest extends \PHPUnit_Framework_TestCase
         $routeBinderMock = \Mockery::mock(RouteBinder::class);
 
         $routeBinders = [
-            'fooBinder', 'barBinder', 'bazBinder'
+            'fooBinder', 'barBinder', 'bazBinder',
         ];
 
         $appMock
@@ -39,7 +39,7 @@ class RouteBinderServiceProviderTest extends \PHPUnit_Framework_TestCase
 
         $configMock
             ->shouldReceive('get')
-            ->with('route-binder::routes')
+            ->with('route-binder')
             ->andReturn($routeBinders);
 
         $routeBinderMock
