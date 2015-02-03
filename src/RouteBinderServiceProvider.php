@@ -43,7 +43,7 @@ final class RouteBinderServiceProvider extends ServiceProvider
         $config = $this->app['config'];
 
         /** @type \Illuminate\Routing\Router $router */
-        $router = $this->app->router;
+        $router = $this->app['router'];
 
         if ($config->has('route-binder')) {
             foreach ($config->get('route-binder') as $binder) {
