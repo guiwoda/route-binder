@@ -1,4 +1,4 @@
-<?php
+<?php namespace Tests;
 
 use GuiWoda\RouteBinder\RouteBinder;
 use GuiWoda\RouteBinder\RouteBinderServiceProvider;

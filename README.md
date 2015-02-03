@@ -38,33 +38,33 @@ Afterwards, you'll need to create some classes that implement the `GuiWoda\Route
 Don't panic! You'll see it's a piece of cake:
 
 ```php
-namespace App\Http\Routes;
+    namespace App\Http\Routes;
 
-use GuiWoda\RouteBinder\RouteBinder;
-use Illuminate\Routing\Router;
+    use GuiWoda\RouteBinder\RouteBinder;
+    use Illuminate\Routing\Router;
 
-class FooRouteBinder implements RouteBinder
-{
-    /**
-     * This is what I meant with #3 up there.
-     * Completely optional, but highly recommended.
-     */
-    const INDEX = 'foo.index';
-
-    /**
-     * The $router instance is the same as what you get
-     * when you use the Route facade! No change there ;-)
-     */
-    public function bind(Router $router)
+    class FooRouteBinder implements RouteBinder
     {
-        $router->get('foo', ['as' => self::INDEX, 'uses' => function(){
-            return \View::make('hello');
-        }]);
+        /**
+         * This is what I meant with #3 up there.
+         * Completely optional, but highly recommended.
+         */
+        const INDEX = 'foo.index';
+
+        /**
+         * The $router instance is the same as what you get
+         * when you use the Route facade! No change there ;-)
+         */
+        public function bind(Router $router)
+        {
+            $router->get('foo', ['as' => self::INDEX, 'uses' => function(){
+                return \View::make('hello');
+            }]);
+        }
     }
-}
 ```
 
-And add them to the published config file (you find it now in `app/config/packages/guiwoda/route-binder/routes.php`):
+And add them to the published config file (you find it now in `app/config/route-binder.php`):
 
 ```php
     return [
