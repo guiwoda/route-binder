@@ -1,5 +1,6 @@
 <?php
-return array(
+
+return [
     /**
      * Put all your route binder classes here.
      * The ServiceProvider will use the IoC container to instantiate them
@@ -10,4 +11,4 @@ return array(
      * App\Http\Routes\HomeRouteBinder::class,
      * App\Http\Routes\FooRouteBinder::class
      */
-);
+];

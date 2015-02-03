@@ -5,25 +5,38 @@ use Illuminate\Support\ServiceProvider;
 final class RouteBinderServiceProvider extends ServiceProvider
 {
     /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
+
+    /**
      * Register the service provider.
      *
      * @return void
      */
     public function register()
     {
-        // Nothing here...
+        //
     }
 
     /**
-     * Register routes on boot
+     * Bootstrap the application events.
+     *
+     * @return void
      */
     public function boot()
     {
-        $this->package('guiwoda/route-binder', 'route-binder', realpath(__DIR__));
+        $source = realpath(__DIR__.'/config/route-binder.php');
+        $this->publishes([$source => config_path('route-binder.php')]);
 
         $this->bootRoutes();
     }
 
+    /**
+     * Register all routes
+     */
     public function bootRoutes()
     {
         /** @type \Illuminate\Config\Repository $config */
@@ -32,9 +45,10 @@ final class RouteBinderServiceProvider extends ServiceProvider
         /** @type \Illuminate\Routing\Router $router */
         $router = $this->app['router'];
 
-        foreach ($config->get('route-binder::routes') as $binder)
-        {
-            $this->app->make($binder)->bind($router);
+        if ($config->has('route-binder')) {
+            foreach ($config->get('route-binder') as $binder) {
+                $this->app->make($binder)->bind($router);
+            }
         }
     }
 }
